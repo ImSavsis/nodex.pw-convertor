@@ -1,0 +1,4 @@
+flask
+pillow
+py7zr
+rarfile

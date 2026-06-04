@@ -1,0 +1,326 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --blue:        #1a73e8;
+    --blue-hover:  #1557b0;
+    --green:       #0f9d58;
+    --green-hover: #0b8043;
+    --red:         #d93025;
+    --bg:          #f8f9fa;
+    --border:      #dadce0;
+    --muted:       #5f6368;
+    --soft:        #9aa0a6;
+    --text:        #202124;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+}
+
+/* шапка */
+header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 13px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    line-height: 1;
+}
+
+.logo .n   { color: #4285f4; }
+.logo .o   { color: #ea4335; }
+.logo .d   { color: #fbbc04; }
+.logo .e   { color: #4285f4; }
+.logo .x   { color: #34a853; }
+.logo .dot { color: #ea4335; }
+.logo .pw  { color: #34a853; }
+.logo .sep { color: var(--border); margin: 0 6px; font-weight: 300; }
+.logo .name { color: var(--muted); font-weight: 400; font-size: 16px; }
+
+.ffmpeg-warn {
+    font-size: 12px;
+    color: #7a5c00;
+    background: #fef9c3;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #f5c400;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.link-btn {
+    background: none;
+    border: none;
+    color: var(--blue);
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+}
+
+.link-btn:disabled {
+    color: var(--muted);
+    cursor: default;
+    text-decoration: none;
+}
+
+code {
+    font-family: 'Roboto Mono', 'Consolas', monospace;
+    font-size: 11px;
+    background: #f1f3f4;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: var(--text);
+}
+
+/* основная область */
+main {
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 16px 60px;
+}
+
+/* зона загрузки */
+.dropzone {
+    background: #fff;
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 56px 40px 48px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .18s, background .18s;
+    user-select: none;
+}
+
+.dropzone:hover,
+.dropzone.drag-over {
+    border-color: var(--blue);
+    background: #f0f6ff;
+}
+
+.dropzone.drag-over .drop-icon {
+    color: var(--blue);
+    transform: translateY(-4px);
+}
+
+.drop-icon {
+    color: #c9cdd0;
+    margin-bottom: 14px;
+    transition: color .18s, transform .18s;
+    display: inline-block;
+}
+
+.drop-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.drop-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+.file-label {
+    color: var(--blue);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.drop-formats {
+    font-size: 11px;
+    color: var(--soft);
+    letter-spacing: .2px;
+}
+
+/* список файлов */
+.file-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* карточка файла */
+.file-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    transition: box-shadow .15s;
+}
+
+.file-card:hover {
+    box-shadow: 0 1px 6px rgba(0,0,0,.08);
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.file-icon.image   { background: #e8f5e9; }
+.file-icon.video   { background: #fce4ec; }
+.file-icon.audio   { background: #e3f2fd; }
+.file-icon.archive { background: #fff8e1; }
+.file-icon.unknown { background: #f3e5f5; }
+
+.file-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* действия */
+.file-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.format-select {
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text);
+    background: #fff;
+    cursor: pointer;
+    outline: none;
+    font-family: inherit;
+    transition: border-color .15s;
+}
+
+.format-select:focus {
+    border-color: var(--blue);
+}
+
+/* кнопки */
+.btn {
+    height: 34px;
+    padding: 0 18px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: .2px;
+    transition: background .15s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--blue-hover);
+}
+
+.btn-primary:disabled {
+    background: #e0e0e0;
+    color: var(--muted);
+    cursor: not-allowed;
+}
+
+.btn-download {
+    background: var(--green);
+    color: #fff;
+}
+
+.btn-download:hover {
+    background: var(--green-hover);
+}
+
+/* статус */
+.file-status {
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 80px;
+}
+
+.file-status.error {
+    color: var(--red);
+}
+
+.file-status.success {
+    color: var(--green);
+}
+
+/* спиннер */
+.spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #e0e0e0;
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin .65s linear infinite;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden { display: none !important; }
+
+/* адаптив */
+@media (max-width: 600px) {
+    main { margin: 20px auto; }
+    .dropzone { padding: 40px 20px; }
+    .file-card { flex-direction: column; align-items: flex-start; }
+    .file-actions { width: 100%; }
+}

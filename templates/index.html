@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodex.pw Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <span class="n">N</span><span class="o">o</span><span class="d">d</span><span class="e">e</span><span class="x">x</span><span class="dot">.</span><span class="pw">pw</span>
+        <span class="sep">/</span>
+        <span class="name">converter</span>
+    </div>
+    {% if not ffmpeg_ready %}
+    <div class="ffmpeg-warn">
+        ffmpeg не найден —
+        <button id="setupFfmpegBtn" class="link-btn">скачать автоматически (Windows)</button>
+        &nbsp;или&nbsp; <code>apt install ffmpeg</code> / <code>brew install ffmpeg</code>
+    </div>
+    {% endif %}
+</header>
+
+<main>
+    <div id="dropzone" class="dropzone">
+        <div class="drop-icon">
+            <svg viewBox="0 0 24 24" width="44" height="44" fill="none">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" fill="currentColor" opacity=".3"/>
+                <path d="M14 13v4h-4v-4H7l5-5 5 5h-3z" fill="currentColor"/>
+            </svg>
+        </div>
+        <p class="drop-title">перетащи файлы сюда</p>
+        <p class="drop-sub">или <label for="fileInput" class="file-label">выбери файлы</label> &nbsp;·&nbsp; ctrl+v чтобы вставить</p>
+        <input type="file" id="fileInput" multiple hidden>
+        <p class="drop-formats">изображения &nbsp;·&nbsp; видео &nbsp;·&nbsp; аудио &nbsp;·&nbsp; архивы &nbsp;·&nbsp; webp &nbsp;·&nbsp; и всё остальное</p>
+    </div>
+
+    <div id="fileList" class="file-list hidden"></div>
+</main>
+
+<script>
+    window.FFMPEG_READY = {{ 'true' if ffmpeg_ready else 'false' }};
+</script>
+<script src="/static/app.js"></script>
+</body>
+</html>
